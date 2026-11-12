@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#ea580c" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Rezeptsammler Hogau13" />
+  <title>Rezeptsammler Hogau13</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #fafaf9;
+      color: #1c1917;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    @media print {
+      @page {
+        margin: 9mm 11mm;
+        size: A4 portrait;
+      }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        box-sizing: border-box !important;
+      }
+      html, body {
+        background: #ffffff !important;
+        color: #1c1917 !important;
+        font-size: 9.2pt !important;
+        line-height: 1.32 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .no-print, header, nav, button, #toast-container, #modal-backdrop, #cooking-mode-overlay, #timer-widget {
+        display: none !important;
+      }
+      main {
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .print-header-note {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 7.5pt !important;
+        color: #78716c !important;
+        border-bottom: 1px solid #e7e5e4 !important;
+        padding-bottom: 3px !important;
+        margin-bottom: 8px !important;
+      }
+      .print-clean-card {
+        box-shadow: none !important;
+        border: 1.5px solid var(--cat-border, #e7e5e4) !important;
+        border-top: 5px solid var(--cat-primary, #ea580c) !important;
+        border-radius: 10px !important;
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+      }
+      .print-hero-row {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: stretch !important;
+        background: var(--cat-bg, #fff7ed) !important;
+        border-bottom: 1px solid var(--cat-border, #fed7aa) !important;
+        padding: 10px 14px !important;
+        gap: 14px !important;
+      }
+      .print-hero-img-wrap {
+        width: 115px !important;
+        min-width: 115px !important;
+        height: 86px !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+        border: 1px solid var(--cat-border, #fed7aa) !important;
+        background: #ffffff !important;
+      }
+      .print-hero-img {
+        width: 100% !important;
+        height: 100% !important;
+        max-height: 86px !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        object-fit: cover !important;
+      }
+      .print-hero-meta {
+        padding: 0 !important;
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+      }
+      .print-cat-badge {
+        display: inline-block !important;
+        background: var(--cat-primary, #ea580c) !important;
+        color: #ffffff !important;
+        font-size: 7.5pt !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.04em !important;
+        padding: 2px 8px !important;
+        border-radius: 999px !important;
+      }
+      .print-recipe-title {
+        font-size: 15.5pt !important;
+        line-height: 1.18 !important;
+        margin: 3px 0 4px 0 !important;
+        color: #1c1917 !important;
+      }
+      .print-meta-line {
+        margin-top: 2px !important;
+        font-size: 8.5pt !important;
+        color: #44403c !important;
+        gap: 12px !important;
+      }
+      .print-meta-line i {
+        color: var(--cat-primary, #ea580c) !important;
+      }
+      .print-two-col {
+        display: grid !important;
+        grid-template-columns: 33% 64% !important;
+        gap: 3% !important;
+        padding: 10px 14px 12px 14px !important;
+        align-items: start !important;
+        border-top: none !important;
+      }
+      .print-section-title {
+        font-size: 10.5pt !important;
+        font-weight: 800 !important;
+        color: var(--cat-dark, #9a3412) !important;
+        border-bottom: 1.5px solid var(--cat-border, #fed7aa) !important;
+        padding-bottom: 3px !important;
+        margin-bottom: 6px !important;
+      }
+      .print-ing-list {
+        background: var(--cat-bg, #fff7ed) !important;
+        border: 1px solid var(--cat-border, #fed7aa) !important;
+        border-radius: 8px !important;
+        padding: 6px 8px !important;
+        margin: 0 !important;
+      }
+      .print-ing-list li {
+        padding: 2.5px 2px !important;
+        margin: 0 !important;
+        border-bottom: 1px dashed rgba(0, 0, 0, 0.08) !important;
+        border-radius: 0 !important;
+        line-height: 1.25 !important;
+      }
+      .print-ing-list li:last-child {
+        border-bottom: none !important;
+      }
+      .print-ing-list span {
+        font-size: 8.6pt !important;
+      }
+      .print-steps-list {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 5px !important;
+      }
+      .print-step-item {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        margin: 0 !important;
+        padding: 5px 8px !important;
+        border-radius: 7px !important;
+        border: 1px solid #e7e5e4 !important;
+        border-left: 3px solid var(--cat-primary, #ea580c) !important;
+        background: #ffffff !important;
+        gap: 8px !important;
+        align-items: flex-start !important;
+      }
+      .print-step-badge {
+        width: 17px !important;
+        height: 17px !important;
+        min-width: 17px !important;
+        font-size: 7.5pt !important;
+        margin-top: 1px !important;
+        background: var(--cat-primary, #ea580c) !important;
+        color: #ffffff !important;
+      }
+      .print-step-text {
+        font-size: 8.8pt !important;
+        line-height: 1.3 !important;
+        margin: 0 !important;
+      }
+      .print-notes-box {
+        margin-top: 7px !important;
+        padding: 6px 9px !important;
+        border-radius: 7px !important;
+        background: var(--cat-bg, #fffbeb) !important;
+        border: 1px solid var(--cat-border, #fde68a) !important;
+        color: var(--cat-dark, #78350f) !important;
+        font-size: 8.3pt !important;
+        line-height: 1.28 !important;
+      }
+    }
+    .print-header-note { display: none; }
+  </style>
+</head>
+<body class="pb-24 md:pb-10">
+
+  <!-- Top Navigation Header -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-stone-200 no-print">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-2">
+      <!-- Brand -->
+      <div class="flex items-center gap-2.5 cursor-pointer" data-action="nav" data-view="recipes">
+        <div class="w-10 h-10 rounded-xl bg-orange-600 text-white flex items-center justify-center shadow-sm">
+          <i class="fa-solid fa-utensils text-lg"></i>
+        </div>
+        <div>
+          <h1 class="font-extrabold text-base sm:text-lg leading-tight tracking-tight text-stone-900">Rezeptsammler Hogau13</h1>
+          <p class="text-[11px] text-stone-500 hidden sm:block">Deine digitale Küche & Backstube</p>
+        </div>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center gap-1 bg-stone-100 p-1 rounded-xl">
+        <button data-action="nav" data-view="recipes" class="nav-btn px-3 py-1.5 rounded-lg text-sm font-semibold transition bg-white text-orange-600 shadow-sm">
+          <i class="fa-solid fa-book-open mr-1.5"></i>Rezepte
+        </button>
+        <button data-action="nav" data-view="bread" class="nav-btn px-3 py-1.5 rounded-lg text-sm font-semibold text-stone-600 hover:text-stone-900 transition">
+          <i class="fa-solid fa-bread-slice mr-1.5"></i>Brotteigrechner
+        </button>
+        <button data-action="nav" data-view="import" class="nav-btn px-3 py-1.5 rounded-lg text-sm font-semibold text-stone-600 hover:text-stone-900 transition">
+          <i class="fa-solid fa-cloud-arrow-down mr-1.5"></i>Web-Import
+        </button>
+        <button data-action="nav" data-view="editor" class="nav-btn px-3 py-1.5 rounded-lg text-sm font-semibold text-stone-600 hover:text-stone-900 transition">
+          <i class="fa-solid fa-plus mr-1.5"></i>Neu
+        </button>
+        <button data-action="nav" data-view="shopping" class="nav-btn px-3 py-1.5 rounded-lg text-sm font-semibold text-stone-600 hover:text-stone-900 transition relative">
+          <i class="fa-solid fa-cart-shopping mr-1.5"></i>Einkauf
+          <span id="nav-shop-badge" class="hidden ml-1 px-1.5 py-0.2 text-[10px] bg-orange-600 text-white rounded-full">0</span>
+        </button>
+        <button data-action="nav" data-view="planner" class="nav-btn px-3 py-1.5 rounded-lg text-sm font-semibold text-stone-600 hover:text-stone-900 transition">
+          <i class="fa-solid fa-calendar-days mr-1.5"></i>Wochenplan
+        </button>
+      </nav>
+
+      <!-- Right Action Controls -->
+      <div class="flex items-center gap-2">
+        <button data-action="open-install-modal" title="Als App installieren" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-orange-50 hover:bg-orange-100 text-orange-700 border border-orange-200 text-xs font-bold transition">
+          <i class="fa-solid fa-mobile-screen-button"></i><span class="hidden sm:inline">App installieren</span>
+        </button>
+        <button data-action="open-storage-modal" title="Speicher & Backup" class="w-9 h-9 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 flex items-center justify-center transition">
+          <i class="fa-solid fa-cloud-arrow-up text-sm"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="lg:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur border-t border-stone-200 px-2 py-2 flex items-center justify-around no-print shadow-lg">
+    <button data-action="nav" data-view="recipes" class="mob-nav-btn flex flex-col items-center text-orange-600">
+      <i class="fa-solid fa-book-open text-base"></i>
+      <span class="text-[10px] font-bold mt-0.5">Rezepte</span>
+    </button>
+    <button data-action="nav" data-view="bread" class="mob-nav-btn flex flex-col items-center text-stone-500 hover:text-stone-800">
+      <i class="fa-solid fa-bread-slice text-base"></i>
+      <span class="text-[10px] font-semibold mt-0.5">Brot</span>
+    </button>
+    <button data-action="nav" data-view="import" class="mob-nav-btn flex flex-col items-center text-stone-500 hover:text-stone-800">
+      <i class="fa-solid fa-cloud-arrow-down text-base"></i>
+      <span class="text-[10px] font-semibold mt-0.5">Import</span>
+    </button>
+    <button data-action="nav" data-view="editor" class="mob-nav-btn flex flex-col items-center text-stone-500 hover:text-stone-800">
+      <i class="fa-solid fa-plus-circle text-base"></i>
+      <span class="text-[10px] font-semibold mt-0.5">Neu</span>
+    </button>
+    <button data-action="nav" data-view="shopping" class="mob-nav-btn flex flex-col items-center text-stone-500 hover:text-stone-800 relative">
+      <i class="fa-solid fa-cart-shopping text-base"></i>
+      <span class="text-[10px] font-semibold mt-0.5">Einkauf</span>
+    </button>
+    <button data-action="nav" data-view="planner" class="mob-nav-btn flex flex-col items-center text-stone-500 hover:text-stone-800">
+      <i class="fa-solid fa-calendar-days text-base"></i>
+      <span class="text-[10px] font-semibold mt-0.5">Planer</span>
+    </button>
+  </nav>
+
+  <!-- Floating Kitchen Timer Widget -->
+  <div id="timer-widget" class="hidden fixed bottom-20 md:bottom-6 right-4 z-40 bg-stone-900 text-white px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 no-print">
+    <i class="fa-solid fa-stopwatch text-orange-400 text-xl animate-pulse"></i>
+    <div>
+      <div class="text-[10px] uppercase tracking-wider text-stone-400">Küchentimer</div>
+      <div id="timer-display" class="font-mono font-bold text-lg leading-none">00:00</div>
+    </div>
+    <button data-action="timer-toggle" id="timer-toggle-btn" class="px-2.5 py-1 rounded-lg bg-orange-600 hover:bg-orange-700 text-xs font-bold transition">Pause</button>
+    <button data-action="timer-stop" class="text-stone-400 hover:text-white p-1"><i class="fa-solid fa-xmark text-xs"></i></button>
+  </div>
+
+  <!-- Fullscreen Cooking Mode Overlay -->
+  <div id="cooking-mode-overlay" class="hidden fixed inset-0 z-50 bg-stone-950 text-stone-100 flex flex-col no-print"></div>
+
+  <!-- Modal Backdrop -->
+  <div id="modal-backdrop" class="hidden fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center p-4 no-print">
+    <div id="modal-container" class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"></div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast-container" class="fixed top-20 right-4 z-50 pointer-events-none flex flex-col gap-2"></div>
+
+  <!-- Main Content Viewport -->
+  <main class="max-w-6xl mx-auto px-4 py-6">
+    <div id="app-view"></div>
+  </main>
+
+  <script>
+    // ==========================================
+    // 1. DATA & CATEGORY ARCHITECTURE
+    // ==========================================
+    const MAIN_CATEGORIES = [
+      'Hauptgericht',
+      'Vorspeise',
+      'Salate & Suppen',
+      'Dessert',
+      'Snacks',
+      'Backen',
+      'Brotaufstriche',
+      'Getränke'
+    ];
+
+    function getCategoryTheme(category, drinkType = 'alkoholfrei') {
+      const themes = {
+        'Hauptgericht': {
+          primary: '#ea580c', dark: '#9a3412', bg: '#fff7ed', border: '#fdba74',
+          pillActive: 'background-color:#ea580c;color:#ffffff;', badgeStyle: 'background-color:#ea580c;color:#ffffff;', lightBadgeStyle: 'background-color:#ffedd5;color:#9a3412;border:1px solid #fdba74;'
+        },
+        'Vorspeise': {
+          primary: '#15803d', dark: '#14532d', bg: '#f0fdf4', border: '#86efac',
+          pillActive: 'background-color:#15803d;color:#ffffff;', badgeStyle: 'background-color:#15803d;color:#ffffff;', lightBadgeStyle: 'background-color:#dcfce7;color:#14532d;border:1px solid #86efac;'
+        },
+        'Salate & Suppen': {
+          primary: '#4d7c0f', dark: '#365314', bg: '#f7fee7', border: '#bef264',
+          pillActive: 'background-color:#4d7c0f;color:#ffffff;', badgeStyle: 'background-color:#4d7c0f;color:#ffffff;', lightBadgeStyle: 'background-color:#ecfccb;color:#365314;border:1px solid #bef264;'
+        },
+        'Dessert': {
+          primary: '#c026d3', dark: '#701a75', bg: '#fdf4ff', border: '#f0abfc',
+          pillActive: 'background-color:#c026d3;color:#ffffff;', badgeStyle: 'background-color:#c026d3;color:#ffffff;', lightBadgeStyle: 'background-color:#fae8ff;color:#86198f;border:1px solid #f0abfc;'
+        },
+        'Snacks': {
+          primary: '#4f46e5', dark: '#312e81', bg: '#eef2ff', border: '#a5b4fc',
+          pillActive: 'background-color:#4f46e5;color:#ffffff;', badgeStyle: 'background-color:#4f46e5;color:#ffffff;', lightBadgeStyle: 'background-color:#e0e7ff;color:#3730a3;border:1px solid #a5b4fc;'
+        },
+        'Backen': {
+          primary: '#78350f', dark: '#451a03', bg: '#fef3c7', border: '#d97706',
+          pillActive: 'background-color:#78350f;color:#ffffff;', badgeStyle: 'background-color:#78350f;color:#ffffff;', lightBadgeStyle: 'background-color:#fef3c7;color:#78350f;border:1px solid #fcd34d;'
+        },
+        'Brotaufstriche': {
+          primary: '#b45309', dark: '#78350f', bg: '#fffbeb', border: '#fde68a',
+          pillActive: 'background-color:#b45309;color:#ffffff;', badgeStyle: 'background-color:#b45309;color:#ffffff;', lightBadgeStyle: 'background-color:#fef3c7;color:#b45309;border:1px solid #fde68a;'
+        },
+        'Getränke': drinkType === 'alkoholhaltig' ? {
+          primary: '#881337', dark: '#4c0519', bg: '#fff1f2', border: '#fda4af',
+          pillActive: 'background-color:#881337;color:#ffffff;', badgeStyle: 'background-color:#881337;color:#ffffff;', lightBadgeStyle: 'background-color:#ffe4e6;color:#881337;border:1px solid #fda4af;'
+        } : {
+          primary: '#0d9488', dark: '#115e59', bg: '#f0fdfa', border: '#5eead4',
+          pillActive: 'background-color:#0d9488;color:#ffffff;', badgeStyle: 'background-color:#0d9488;color:#ffffff;', lightBadgeStyle: 'background-color:#ccfbf1;color:#115e59;border:1px solid #5eead4;'
+        }
+      };
+      return themes[category] || themes['Hauptgericht'];
+    }
+
+    function getCategoryLabel(recipe) {
+      if (recipe.category === 'Getränke') {
+        const isAlc = recipe.drinkType === 'alkoholhaltig';
+        return isAlc ? 'Getränke • Alkoholhaltig' : 'Getränke • Alkoholfrei';
+      }
+      return recipe.category || 'Hauptgericht';
+    }
+
+    const DEFAULT_RECIPES = [
+      {
+        id: 'r1',
+        title: 'Allgäuer Käsespätzle mit Röstzwiebeln',
+        category: 'Hauptgericht',
+        diet: 'Vegetarisch',
+        prepTime: 35,
+        servings: 4,
+        rating: 5,
+        favorite: true,
+        sourceUrl: '',
+        image: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=900&q=80',
+        tags: ['Vegetarisch', 'Klassiker', 'Allgäu'],
+        notes: 'Am besten würzigen Allgäuer Bergkäse und Emmentaler mischen.',
+        ingredients: [
+          { amount: 400, unit: 'g', name: 'Spätzlemehl (doppelgriffig)', aisle: 'Backzutaten & Mehl' },
+          { amount: 4, unit: 'Stück', name: 'Eier (Größe M)', aisle: 'Milchprodukte & Eier' },
+          { amount: 250, unit: 'g', name: 'Bergkäse, gerieben', aisle: 'Milchprodukte & Eier' },
+          { amount: 3, unit: 'Stück', name: 'Große Zwiebeln', aisle: 'Obst & Gemüse' }
+        ],
+        steps: [
+          'Mehl, Eier, eine Prise Salz und lauwarmes Wasser zu einem zähfließenden Teig verschlagen, bis er wirft.',
+          'Zwiebeln in feine Ringe schneiden und in einer Pfanne mit Butter goldbraun und knusprig anbraten.',
+          'Teig portionsweise in kochendes Salzwasser schaben oder pressen; sobald die Spätzle an der Oberfläche schwimmen, herausheben.',
+          'Spätzle abwechselnd mit geriebenem Käse in eine warme Auflaufform schichten und im Ofen kurz schmelzen lassen.'
+        ]
+      },
+      {
+        id: 'r2',
+        title: 'Knuspriges Sauerteig-Bauernbrot',
+        category: 'Backen',
+        diet: 'Vegetarisch',
+        prepTime: 60,
+        servings: 8,
+        rating: 5,
+        favorite: true,
+        sourceUrl: '',
+        image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80',
+        tags: ['Brot', 'Sauerteig', 'Vegan'],
+        notes: 'Im vorgeheizten Gusseisentopf backen für eine besonders rösche Kruste.',
+        ingredients: [
+          { amount: 350, unit: 'g', name: 'Weizenmehl Type 1050', aisle: 'Backzutaten & Mehl' },
+          { amount: 150, unit: 'g', name: 'Roggenmehl Type 1150', aisle: 'Backzutaten & Mehl' },
+          { amount: 120, unit: 'g', name: 'Aktiver Sauerteig', aisle: 'Backzutaten & Mehl' },
+          { amount: 340, unit: 'ml', name: 'Lauwarmes Wasser', aisle: 'Getränke' },
+          { amount: 11, unit: 'g', name: 'Meersalz', aisle: 'Gewürze & Backzutaten' }
+        ],
+        steps: [
+          'Alle Zutaten zu einem geschmeidigen Teig verkneten und ruhen lassen.',
+          'Mehrere Dehn- und Falzintervalle im Laufe von 2 Stunden durchführen.',
+          'Den Teig im Gärkörbchen über Nacht im Kühlschrank reifen lassen.',
+          'Im vorgeheizten Ofen bei 230 °C mit Dampf anbacken, danach bei 200 °C fertig backen.'
+        ]
+      },
+      {
+        id: 'r3',
+        title: 'Würziger Kräuter-Frischkäse-Aufstrich',
+        category: 'Brotaufstriche',
+        diet: 'Vegetarisch',
+        prepTime: 10,
+        servings: 4,
+        rating: 5,
+        favorite: true,
+        sourceUrl: '',
+        image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=900&q=80',
+        tags: ['Aufstrich', 'Schnell', 'Vegetarisch'],
+        notes: 'Schmeckt hervorragend auf frischem Sauerteigbrot.',
+        ingredients: [
+          { amount: 300, unit: 'g', name: 'Frischkäse (natur)', aisle: 'Milchprodukte & Eier' },
+          { amount: 1, unit: 'Bund', name: 'Frische Kräuter (Schnittlauch, Petersilie, Dill)', aisle: 'Obst & Gemüse' },
+          { amount: 1, unit: 'Zehe', name: 'Knoblauch', aisle: 'Obst & Gemüse' },
+          { amount: 1, unit: 'Prise', name: 'Salz & schwarzer Pfeffer', aisle: 'Gewürze & Backzutaten' }
+        ],
+        steps: [
+          'Frischkäse in eine Schüssel geben und mit einer Gabel cremig rühren.',
+          'Kräuter fein hacken und Knoblauch sehr fein pressen.',
+          'Alles gründlich vermengen und mit Salz und Pfeffer abschmecken.'
+        ]
+      },
+      {
+        id: 'r4',
+        title: 'Hausgemachte Zitronen-Minz-Limonade',
+        category: 'Getränke',
+        drinkType: 'alkoholfrei',
+        diet: 'Vegetarisch',
+        prepTime: 10,
+        servings: 4,
+        rating: 5,
+        favorite: true,
+        sourceUrl: '',
+        image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=80',
+        tags: ['Alkoholfrei', 'Erfrischend', 'Sommer'],
+        notes: 'Mit eiskaltem Sprudelwasser aufgießen und frische Minzblätter leicht andrücken.',
+        ingredients: [
+          { amount: 3, unit: 'Stück', name: 'Bio-Zitronen', aisle: 'Obst & Gemüse' },
+          { amount: 40, unit: 'g', name: 'Rohrzucker', aisle: 'Backzutaten & Mehl' },
+          { amount: 1, unit: 'Bund', name: 'Frische Pfefferminze', aisle: 'Obst & Gemüse' },
+          { amount: 800, unit: 'ml', name: 'Mineralwasser', aisle: 'Getränke' }
+        ],
+        steps: [
+          'Zitronen auspressen und Saft mit Zucker und Minze verrühren.',
+          'Mit eiskaltem Mineralwasser und Eiswürfeln in einer Karaffe servieren.'
+        ]
+      }
+    ];
+
+    const DEMO_IMPORTS = [
+      {
+        title: 'Spaghetti Carbonara Original',
+        category: 'Hauptgericht',
+        diet: 'Normal',
+        prepTime: 20,
+        servings: 2,
+        image: 'https://images.unsplash.com/photo-1612874742237-6526221588e3?auto=format&fit=crop&w=900&q=80',
+        sourceUrl: 'https://beispiel-kochblog.de/carbonara',
+        tags: ['Italienisch', 'Pasta', 'Schnell'],
+        ingredients: [
+          { amount: 250, unit: 'g', name: 'Spaghetti', aisle: 'Konserven & Vorräte' },
+          { amount: 120, unit: 'g', name: 'Guanciale oder Pancetta', aisle: 'Fleisch & Wurst' },
+          { amount: 3, unit: 'Stück', name: 'Eigelb (Bio)', aisle: 'Milchprodukte & Eier' },
+          { amount: 50, unit: 'g', name: 'Pecorino Romano, frisch gerieben', aisle: 'Milchprodukte & Eier' }
+        ],
+        steps: [
+          'Pasta in reichlich kochendem Salzwasser al dente kochen.',
+          'Guanciale in feine Streifen schneiden und in einer Pfanne ohne Öl knusprig anbraten.',
+          'Eigelb und Pecorino in einer Schüssel schaumig schlagen.',
+          'Heiße Pasta und etwas Nudelwasser mit dem Speck und der Eimasse cremig schwenken.'
+        ]
+      },
+      {
+        title: 'Frische Tomaten-Basilikum-Bruschetta',
+        category: 'Vorspeise',
+        diet: 'Vegetarisch',
+        prepTime: 15,
+        servings: 4,
+        image: 'https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=900&q=80',
+        sourceUrl: 'https://beispiel-kochblog.de/bruschetta',
+        tags: ['Vorspeise', 'Vegan', 'Sommer'],
+        ingredients: [
+          { amount: 1, unit: 'Stück', name: 'Ciabatta-Brot', aisle: 'Brot & Backwaren' },
+          { amount: 400, unit: 'g', name: 'Reife Strauchtomaten', aisle: 'Obst & Gemüse' },
+          { amount: 1, unit: 'Bund', name: 'Frischer Basilikum', aisle: 'Obst & Gemüse' }
+        ],
+        steps: [
+          'Tomaten fein würfeln, mit Olivenöl, Salz, Pfeffer und Basilikum marinieren.',
+          'Ciabatta in Scheiben schneiden und rösten, mit Knoblauch einreiben und Tomaten auflegen.'
+        ]
+      },
+      {
+        title: 'Klassischer Aperol Spritz',
+        category: 'Getränke',
+        drinkType: 'alkoholhaltig',
+        diet: 'Vegetarisch',
+        prepTime: 5,
+        servings: 2,
+        rating: 5,
+        favorite: false,
+        sourceUrl: '',
+        image: 'https://images.unsplash.com/photo-1560512823-829485b8bf24?auto=format&fit=crop&w=900&q=80',
+        tags: ['Alkoholhaltig', 'Aperitif', 'Schnell'],
+        notes: 'Klassisches Mischverhältnis 3 Teile Prosecco, 2 Teile Aperol, 1 Schuss Soda.',
+        ingredients: [
+          { amount: 180, unit: 'ml', name: 'Prosecco', aisle: 'Getränke' },
+          { amount: 120, unit: 'ml', name: 'Aperol', aisle: 'Getränke' },
+          { amount: 60, unit: 'ml', name: 'Sprudelwasser', aisle: 'Getränke' }
+        ],
+        steps: [
+          'Gläser mit Eis füllen, Prosecco, Aperol und Soda dazugeben und umrühren.'
+        ]
+      }
+    ];
+
+    const BREAD_PRESETS = [
+      {
+        name: 'Klassisches Bauernbrot (Sauerteig)',
+        flours: [{ name: 'Weizenmehl 1050', grams: 350 }, { name: 'Roggenmehl 1150', grams: 150 }],
+        hydration: 68, saltPct: 2.2, yeastType: 'none', yeastPct: 0,
+        useSourdough: true, sourdoughPct: 20, sourdoughHydration: 100, subtractStarter: true, extras: []
+      },
+      {
+        name: 'Luftiges Ciabatta (Poolish)',
+        flours: [{ name: 'Weizenmehl 550', grams: 450 }, { name: 'Dunst / Hartweizen', grams: 50 }],
+        hydration: 78, saltPct: 2.0, yeastType: 'fresh', yeastPct: 0.8,
+        useSourdough: false, sourdoughPct: 0, sourdoughHydration: 100, subtractStarter: false, extras: [{ name: 'Olivenöl', grams: 25 }]
+      }
+    ];
+
+    // ==========================================
+    // 2. STATE MANAGEMENT
+    // ==========================================
+    const STORAGE_KEY = 'rezeptsammler_hogau13_recipes_v3';
+    const SETTINGS_KEY = 'rezeptsammler_hogau13_settings_v3';
+
+    let state = {
+      view: 'recipes',
+      recipes: [],
+      shoppingList: [],
+      mealPlan: { Montag: [], Dienstag: [], Mittwoch: [], Donnerstag: [], Freitag: [], Samstag: [], Sonntag: [] },
+      activeRecipeId: null,
+      currentServings: null,
+      checkedIngredients: {},
+      checkedSteps: {},
+      searchQuery: '',
+      selectedCategory: 'Alle',
+      selectedDiet: 'Alle',
+      selectedDrinkType: 'Alle',
+      onlyFavorites: false,
+      sortBy: 'newest',
+      editingRecipe: null,
+      timer: { seconds: 0, running: false, intervalId: null },
+      cookingStep: 0,
+      bread: {
+        recipeTitle: 'Mein Sauerteig-Bauernbrot',
+        breadType: 'weizen',
+        goals: ['lange_frisch', 'aroma'],
+        flours: [{ name: 'Weizenmehl Type 1050', grams: 350 }, { name: 'Roggenmehl Type 1150', grams: 150 }],
+        hydration: 68,
+        saltPct: 2.2,
+        yeastType: 'none',
+        yeastPct: 1.0,
+        useSourdough: true,
+        sourdoughPct: 20,
+        sourdoughHydration: 100,
+        subtractStarter: true,
+        extras: []
+      },
+      settings: { storageMode: 'local' }
+    };
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          state.recipes = Array.isArray(parsed.recipes) ? parsed.recipes : DEFAULT_RECIPES;
+          state.shoppingList = Array.isArray(parsed.shoppingList) ? parsed.shoppingList : [];
+          state.mealPlan = parsed.mealPlan || state.mealPlan;
+          if (parsed.bread) state.bread = { ...state.bread, ...parsed.bread };
+        } else {
+          state.recipes = JSON.parse(JSON.stringify(DEFAULT_RECIPES));
+        }
+      } catch (e) {
+        state.recipes = JSON.parse(JSON.stringify(DEFAULT_RECIPES));
+      }
+      updateBadges();
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          recipes: state.recipes,
+          shoppingList: state.shoppingList,
+          mealPlan: state.mealPlan,
+          bread: state.bread
+        }));
+      } catch (e) {}
+      updateBadges();
+    }
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const el = document.createElement('div');
+      el.className = `px-4 py-2.5 rounded-xl shadow-lg text-sm font-bold text-white transition transform translate-y-2 opacity-0 ${type === 'error' ? 'bg-red-600' : 'bg-stone-900'}`;
+      el.textContent = message;
+      container.appendChild(el);
+      requestAnimationFrame(() => { el.classList.remove('translate-y-2', 'opacity-0'); });
+      setTimeout(() => {
+        el.classList.add('translate-y-2', 'opacity-0');
+        setTimeout(() => el.remove(), 300);
+      }, 3000);
+    }
+
+    function updateBadges() {
+      const badge = document.getElementById('nav-shop-badge');
+      if (badge) {
+        const count = state.shoppingList.filter(i => !i.checked).length;
+        if (count > 0) { badge.textContent = count; badge.classList.remove('hidden'); }
+        else { badge.classList.add('hidden'); }
+      }
+    }
+
+    // ==========================================
+    // 3. RENDER ENGINE
+    // ==========================================
+    function render() {
+      const main = document.getElementById('app-view');
+      if (!main) return;
+
+      document.querySelectorAll('nav [data-action="nav"]').forEach(btn => {
+        const v = btn.dataset.view;
+        if (v === state.view) {
+          btn.classList.add('bg-white', 'text-orange-600', 'shadow-sm');
+          btn.classList.remove('text-stone-600', 'hover:text-stone-900');
+        } else {
+          btn.classList.remove('bg-white', 'text-orange-600', 'shadow-sm');
+          btn.classList.add('text-stone-600', 'hover:text-stone-900');
+        }
+      });
+
+      if (state.view === 'recipes') main.innerHTML = renderRecipesView();
+      else if (state.view === 'bread') main.innerHTML = renderBreadCalculatorView();
+      else if (state.view === 'detail') main.innerHTML = renderDetailView();
+      else if (state.view === 'import') main.innerHTML = renderImportView();
+      else if (state.view === 'editor') main.innerHTML = renderEditorView();
+      else if (state.view === 'shopping') main.innerHTML = renderShoppingView();
+      else if (state.view === 'planner') main.innerHTML = renderPlannerView();
+    }
+
+    function renderRecipesView() {
+      const categories = ['Alle', ...MAIN_CATEGORIES];
+      let filtered = state.recipes.filter(r => {
+        const q = state.searchQuery.toLowerCase();
+        const matchQ = !q || r.title.toLowerCase().includes(q) || (r.tags || []).some(t => t.toLowerCase().includes(q)) || (r.ingredients || []).some(i => i.name.toLowerCase().includes(q));
+        const matchCat = state.selectedCategory === 'Alle' || r.category === state.selectedCategory;
+        const matchDiet = state.selectedDiet === 'Alle' || (r.diet || 'Normal') === state.selectedDiet;
+        const matchDrink = state.selectedCategory !== 'Getränke' || state.selectedDrinkType === 'Alle' || (r.drinkType || 'alkoholfrei') === state.selectedDrinkType;
+        const matchFav = !state.onlyFavorites || r.favorite;
+        return matchQ && matchCat && matchDiet && matchDrink && matchFav;
+      });
+
+      if (state.sortBy === 'rating') filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+      else if (state.sortBy === 'time') filtered.sort((a, b) => (a.prepTime || 999) - (b.prepTime || 999));
+      else if (state.sortBy === 'alpha') filtered.sort((a, b) => a.title.localeCompare(b.title));
+
+      return `
+        <!-- Search & Filter Bar -->
+        <div class="flex flex-col sm:flex-row gap-3 mb-4">
+          <div class="relative flex-1">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400"></i>
+            <input id="search-input" type="text" value="${escapeHtml(state.searchQuery)}" placeholder="Rezept, Zutat oder Tag suchen..."
+              class="w-full pl-10 pr-4 py-2.5 bg-white border border-stone-200 rounded-xl text-sm focus:outline-none focus:border-orange-500 shadow-2xs" />
+          </div>
+          <div class="flex items-center gap-2">
+            <button data-action="toggle-fav-filter" class="px-3.5 py-2.5 rounded-xl border text-sm font-medium flex items-center gap-1.5 transition ${state.onlyFavorites ? 'bg-red-50 border-red-200 text-red-600' : 'bg-white border-stone-200 text-stone-600 hover:bg-stone-50'}">
+              <i class="fa-${state.onlyFavorites ? 'solid' : 'regular'} fa-heart"></i>
+              <span>Favoriten</span>
+            </button>
+            <select id="sort-select" class="px-3 py-2.5 bg-white border border-stone-200 rounded-xl text-sm text-stone-700 focus:outline-none">
+              <option value="newest" ${state.sortBy === 'newest' ? 'selected' : ''}>Neueste zuerst</option>
+              <option value="rating" ${state.sortBy === 'rating' ? 'selected' : ''}>Beste Bewertung</option>
+              <option value="time" ${state.sortBy === 'time' ? 'selected' : ''}>Schnellste zuerst</option>
+              <option value="alpha" ${state.sortBy === 'alpha' ? 'selected' : ''}>A – Z</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Dietary Filter -->
+        <div class="flex items-center gap-2 mb-4 bg-white p-2 rounded-xl border border-stone-200">
+          <span class="text-xs font-bold uppercase tracking-wider text-stone-400 px-1.5">Ernährung:</span>
+          <button data-action="select-diet" data-diet="Alle" class="px-3 py-1 rounded-lg text-xs font-semibold transition ${state.selectedDiet === 'Alle' ? 'bg-stone-800 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'}">Alle</button>
+          <button data-action="select-diet" data-diet="Normal" class="px-3 py-1 rounded-lg text-xs font-semibold transition ${state.selectedDiet === 'Normal' ? 'bg-orange-600 text-white' : 'bg-orange-50 text-orange-800 hover:bg-orange-100'}">Normal</button>
+          <button data-action="select-diet" data-diet="Vegetarisch" class="px-3 py-1 rounded-lg text-xs font-semibold transition ${state.selectedDiet === 'Vegetarisch' ? 'bg-emerald-600 text-white' : 'bg-emerald-50 text-emerald-800 hover:bg-emerald-100'}">Vegetarisch</button>
+        </div>
+
+        <!-- Category Pills (Reordered: Hauptgericht, Vorspeise, Salate & Suppen, Dessert, Snacks, Backen, Brotaufstriche, Getränke) -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 ${state.selectedCategory === 'Getränke' ? 'mb-2.5' : 'mb-5'}">
+          ${categories.map(cat => {
+            const isActive = state.selectedCategory === cat;
+            const cTheme = cat === 'Alle' ? null : getCategoryTheme(cat);
+            const dotHtml = cTheme ? `<span class="inline-block w-2.5 h-2.5 rounded-full mr-1.5" style="background-color:${isActive ? '#ffffff' : cTheme.primary};"></span>` : '';
+            const activeStyle = isActive ? (cTheme ? cTheme.pillActive : 'background-color:#1c1917;color:#ffffff;') : '';
+            return `
+              <button data-action="select-category" data-category="${cat}"
+                style="${activeStyle}"
+                class="px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition flex items-center ${isActive ? 'shadow-xs font-semibold' : 'bg-white border border-stone-200 text-stone-700 hover:bg-stone-100'}">
+                ${dotHtml}${cat}
+              </button>
+            `;
+          }).join('')}
+        </div>
+
+        ${state.selectedCategory === 'Getränke' ? `
+          <!-- Drink Type Sub-Filter -->
+          <div class="flex flex-wrap items-center gap-2 mb-5 p-2.5 bg-white rounded-xl border border-stone-200">
+            <span class="text-xs font-bold uppercase tracking-wider text-stone-400 px-1.5">Getränkeart:</span>
+            <button data-action="select-drink-type" data-drink-type="Alle" class="px-3 py-1 rounded-lg text-xs font-semibold transition ${state.selectedDrinkType === 'Alle' ? 'bg-stone-800 text-white' : 'bg-stone-100 text-stone-600'}">Alle Getränke</button>
+            <button data-action="select-drink-type" data-drink-type="alkoholfrei" style="${state.selectedDrinkType === 'alkoholfrei' ? 'background-color:#0d9488;color:#ffffff;' : ''}" class="px-3 py-1 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 ${state.selectedDrinkType === 'alkoholfrei' ? 'shadow-2xs' : 'bg-teal-50 text-teal-800 border border-teal-200'}">
+              <i class="fa-solid fa-glass-water"></i>Alkoholfrei
+            </button>
+            <button data-action="select-drink-type" data-drink-type="alkoholhaltig" style="${state.selectedDrinkType === 'alkoholhaltig' ? 'background-color:#881337;color:#ffffff;' : ''}" class="px-3 py-1 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 ${state.selectedDrinkType === 'alkoholhaltig' ? 'shadow-2xs' : 'bg-rose-50 text-rose-950 border border-rose-200'}">
+              <i class="fa-solid fa-wine-glass"></i>Alkoholhaltig
+            </button>
+          </div>
+        ` : ''}
+
+        <!-- Recipe Grid -->
+        ${filtered.length === 0 ? `
+          <div class="text-center py-16 bg-white rounded-2xl border border-stone-200">
+            <i class="fa-solid fa-bowl-rice text-4xl text-stone-300 mb-3"></i>
+            <h3 class="font-bold text-stone-800 text-lg">Keine Rezepte gefunden</h3>
+            <p class="text-stone-500 text-sm mt-1 mb-4">Passe deine Filter an oder importiere ein neues Rezept.</p>
+            <button data-action="nav" data-view="import" class="px-4 py-2 bg-orange-600 text-white rounded-xl text-sm font-semibold hover:bg-orange-700">
+              <i class="fa-solid fa-cloud-arrow-down mr-1.5"></i>Rezept aus dem Web importieren
+            </button>
+          </div>
+        ` : `
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            ${filtered.map(r => `
+              <article class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-2xs hover:shadow-md transition flex flex-col group">
+                <div class="relative h-48 bg-stone-200 cursor-pointer overflow-hidden" data-action="open-recipe" data-id="${r.id}">
+                  <img src="${escapeHtml(r.image)}" alt="${escapeHtml(r.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1495521821757-a1efb6729352?auto=format&fit=crop&w=900&q=80'" />
+                  ${(() => {
+                    const cardTheme = getCategoryTheme(r.category, r.drinkType);
+                    const iconHtml = r.category === 'Getränke' ? (r.drinkType === 'alkoholhaltig' ? '<i class="fa-solid fa-wine-glass mr-1"></i>' : '<i class="fa-solid fa-glass-water mr-1"></i>') : '';
+                    return `<span style="${cardTheme.badgeStyle}" class="absolute top-3 left-3 px-2.5 py-1 rounded-lg shadow-xs text-xs font-bold tracking-wide">${iconHtml}${escapeHtml(getCategoryLabel(r))}</span>`;
+                  })()}
+                  ${r.diet === 'Vegetarisch' ? '<span class="absolute top-3 left-32 px-2 py-1 rounded-lg bg-emerald-600 text-white text-[11px] font-bold shadow-xs">Veggie</span>' : ''}
+                  <div class="absolute top-3 right-3 flex items-center gap-1.5">
+                    <button data-action="toggle-fav" data-id="${r.id}" title="Favorit" class="w-9 h-9 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow-xs hover:scale-110 transition">
+                      <i class="fa-${r.favorite ? 'solid text-red-500' : 'regular text-stone-600'} fa-heart"></i>
+                    </button>
+                    <button data-action="delete-recipe" data-id="${r.id}" title="Rezept löschen" class="w-9 h-9 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow-xs text-stone-500 hover:text-red-600 hover:scale-110 transition">
+                      <i class="fa-solid fa-trash text-xs"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="p-4 flex-1 flex flex-col justify-between cursor-pointer" data-action="open-recipe" data-id="${r.id}">
+                  <div>
+                    <h2 class="font-bold text-stone-900 text-base line-clamp-2 group-hover:text-orange-600 transition">${escapeHtml(r.title)}</h2>
+                    <div class="flex items-center gap-3 text-xs text-stone-500 mt-2">
+                      <span><i class="fa-regular fa-clock mr-1 text-orange-500"></i>${r.prepTime || 30} Min.</span>
+                      <span><i class="fa-solid fa-user-group mr-1 text-orange-500"></i>${r.servings || 2} Port.</span>
+                      <span class="text-amber-500">${'★'.repeat(r.rating || 0)}${'☆'.repeat(5 - (r.rating || 0))}</span>
+                    </div>
+                  </div>
+                  <div class="flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-stone-100">
+                    ${(r.tags || []).slice(0, 3).map(t => `<span class="px-2 py-0.5 bg-stone-100 text-stone-600 rounded-md text-[11px] font-medium">#${escapeHtml(t)}</span>`).join('')}
+                  </div>
+                </div>
+              </article>
+            `).join('')}
+          </div>
+        `}
+      `;
+    }
+
+    function renderDetailView() {
+      const r = state.recipes.find(item => item.id === state.activeRecipeId);
+      if (!r) { state.view = 'recipes'; return renderRecipesView(); }
+
+      const baseServings = r.servings || 2;
+      const activeServings = state.currentServings || baseServings;
+      const ratio = activeServings / baseServings;
+
+      const theme = getCategoryTheme(r.category, r.drinkType);
+      const catLabel = getCategoryLabel(r);
+      const themeVars = `--cat-primary: ${theme.primary}; --cat-dark: ${theme.dark}; --cat-bg: ${theme.bg}; --cat-border: ${theme.border};`;
+
+      return `
+        <div class="print-header-note" style="${themeVars}">
+          <span>Rezeptsammler Hogau13 • Kategorie: <strong>${escapeHtml(catLabel)}</strong></span>
+          <span>${activeServings} Portionen • ca. ${r.prepTime || 30} Min.</span>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-4 no-print">
+          <button data-action="nav" data-view="recipes" class="px-3 py-2 rounded-xl bg-white border border-stone-200 text-sm font-medium text-stone-700 hover:bg-stone-50">
+            <i class="fa-solid fa-arrow-left mr-1.5"></i>Zurück
+          </button>
+          <div class="flex flex-wrap items-center gap-2">
+            <button data-action="start-cooking" class="px-3.5 py-2 rounded-xl bg-orange-600 text-white text-sm font-semibold hover:bg-orange-700 shadow-xs">
+              <i class="fa-solid fa-fire-burner mr-1.5"></i>Kochmodus
+            </button>
+            <button data-action="print-recipe" class="px-3.5 py-2 rounded-xl bg-white border border-stone-200 text-sm font-semibold text-stone-700 hover:bg-stone-50">
+              <i class="fa-solid fa-print mr-1.5 text-orange-600"></i>Drucken
+            </button>
+            <button data-action="add-to-planner-modal" data-id="${r.id}" class="px-3 py-2 rounded-xl bg-white border border-stone-200 text-sm font-medium text-stone-700 hover:bg-stone-50" title="In Wochenplan">
+              <i class="fa-solid fa-calendar-plus text-orange-600"></i>
+            </button>
+            <button data-action="edit-recipe" data-id="${r.id}" class="px-3 py-2 rounded-xl bg-white border border-stone-200 text-sm font-medium text-stone-700 hover:bg-stone-50" title="Bearbeiten">
+              <i class="fa-solid fa-pen"></i>
+            </button>
+            <button data-action="delete-recipe" data-id="${r.id}" class="px-3 py-2 rounded-xl bg-white border border-stone-200 text-sm font-medium text-red-600 hover:bg-red-50" title="Löschen">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </div>
+
+        <div style="${themeVars}" class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-xs print-clean-card">
+          <div class="md:flex print-hero-row">
+            <div class="md:w-2/5 h-64 md:h-auto bg-stone-200 print-hero-img-wrap">
+              <img src="${escapeHtml(r.image)}" alt="${escapeHtml(r.title)}" class="w-full h-full object-cover print-hero-img" onerror="this.src='https://images.unsplash.com/photo-1495521821757-a1efb6729352?auto=format&fit=crop&w=900&q=80'" />
+            </div>
+            <div class="p-6 md:w-3/5 flex flex-col justify-between print-hero-meta">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-2">
+                  <span style="${theme.lightBadgeStyle}" class="px-2.5 py-1 rounded-lg text-xs font-bold print-cat-badge">${r.category === 'Getränke' ? (r.drinkType === 'alkoholhaltig' ? '<i class="fa-solid fa-wine-glass mr-1"></i>' : '<i class="fa-solid fa-glass-water mr-1"></i>') : ''}${escapeHtml(catLabel)}</span>
+                  <div class="flex items-center gap-1 no-print">
+                    ${[1,2,3,4,5].map(star => `
+                      <button data-action="rate-recipe" data-id="${r.id}" data-rating="${star}" class="text-lg ${star <= (r.rating || 0) ? 'text-amber-400' : 'text-stone-300'} hover:scale-110 transition">★</button>
+                    `).join('')}
+                  </div>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-extrabold text-stone-900 leading-tight print-recipe-title">${escapeHtml(r.title)}</h1>
+                <div class="flex flex-wrap items-center gap-4 text-sm text-stone-600 mt-3 print-meta-line">
+                  <span><i class="fa-regular fa-clock text-orange-600 mr-1.5"></i>${r.prepTime || 30} Min.</span>
+                  <span><i class="fa-solid fa-user-group text-orange-600 mr-1.5"></i>${activeServings} Portionen</span>
+                  ${r.diet === 'Vegetarisch' ? '<span class="text-emerald-700 font-bold">🌱 Vegetarisch</span>' : ''}
+                  ${r.sourceUrl ? `<a href="${escapeHtml(r.sourceUrl)}" target="_blank" class="text-orange-600 hover:underline no-print"><i class="fa-solid fa-arrow-up-right-from-square mr-1"></i>Quelle</a>` : ''}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 border-t border-stone-200 grid grid-cols-1 md:grid-cols-12 gap-8 print-two-col">
+            <div class="md:col-span-5">
+              <div class="flex items-center justify-between mb-3">
+                <h2 class="text-lg font-bold text-stone-900 print-section-title">Zutaten</h2>
+                <div class="flex items-center gap-1.5 bg-stone-100 p-1 rounded-xl no-print">
+                  <button data-action="change-servings" data-delta="-1" class="w-7 h-7 rounded-lg bg-white shadow-2xs font-bold text-stone-700 hover:text-orange-600">-</button>
+                  <span class="px-2 text-sm font-bold text-stone-800">${activeServings} Port.</span>
+                  <button data-action="change-servings" data-delta="1" class="w-7 h-7 rounded-lg bg-white shadow-2xs font-bold text-stone-700 hover:text-orange-600">+</button>
+                </div>
+              </div>
+
+              <ul class="space-y-2 mb-4 print-ing-list">
+                ${(r.ingredients || []).map((ing, idx) => {
+                  const key = `${r.id}_${idx}`;
+                  const checked = !!state.checkedIngredients[key];
+                  const qty = formatAmount(ing.amount, ratio);
+                  return `
+                    <li data-action="toggle-ing-check" data-key="${key}" class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-stone-50 cursor-pointer transition ${checked ? 'line-through text-stone-400' : 'text-stone-800'}">
+                      <input type="checkbox" ${checked ? 'checked' : ''} class="mt-1 accent-orange-600 rounded no-print" />
+                      <span class="text-sm"><strong class="font-semibold">${escapeHtml(qty)} ${escapeHtml(ing.unit)}</strong> ${escapeHtml(ing.name)}</span>
+                    </li>
+                  `;
+                }).join('')}
+              </ul>
+
+              <button data-action="add-recipe-to-shopping" data-id="${r.id}" class="w-full py-2.5 px-4 rounded-xl bg-orange-50 hover:bg-orange-100 text-orange-700 border border-orange-200 text-sm font-semibold transition no-print">
+                <i class="fa-solid fa-cart-plus mr-1.5"></i>Zutaten auf die Einkaufsliste
+              </button>
+            </div>
+
+            <div class="md:col-span-7">
+              <h2 class="text-lg font-bold text-stone-900 mb-3 print-section-title">Zubereitung</h2>
+              <ol class="space-y-4 print-steps-list">
+                ${(r.steps || []).map((step, idx) => {
+                  const sKey = `${r.id}_s_${idx}`;
+                  const done = !!state.checkedSteps[sKey];
+                  return `
+                    <li data-action="toggle-step-check" data-key="${sKey}" class="flex gap-3.5 p-3 rounded-xl border border-stone-100 hover:border-stone-200 cursor-pointer transition print-step-item ${done ? 'bg-stone-50 opacity-60' : 'bg-white'}">
+                      <div class="w-7 h-7 rounded-full shrink-0 flex items-center justify-center text-xs font-bold print-step-badge ${done ? 'bg-emerald-600 text-white' : 'bg-orange-600 text-white'}">
+                        ${done ? '✓' : idx + 1}
+                      </div>
+                      <p class="text-sm text-stone-800 leading-relaxed print-step-text ${done ? 'line-through' : ''}">${escapeHtml(step)}</p>
+                    </li>
+                  `;
+                }).join('')}
+              </ol>
+
+              ${r.notes ? `
+                <div class="mt-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-sm text-amber-900 print-notes-box">
+                  <strong class="block font-bold mb-1"><i class="fa-regular fa-lightbulb mr-1.5"></i>Notizen & Tipps:</strong>
+                  ${escapeHtml(r.notes)}
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ==========================================
+    // 4. BREAD CALCULATOR & ASSISTANT (3 Goals)
+    // ==========================================
+    function calculateBreadMetrics() {
+      const b = state.bread;
+      let totalFlour = b.flours.reduce((sum, f) => sum + (parseFloat(f.grams) || 0), 0);
+      if (totalFlour <= 0) totalFlour = 500;
+
+      let starterWater = 0;
+      let starterFlour = 0;
+      if (b.useSourdough && b.sourdoughPct > 0) {
+        starterFlour = totalFlour * (b.sourdoughPct / 100);
+        starterWater = starterFlour * (b.sourdoughHydration / 100);
+        if (b.subtractStarter) {
+          totalFlour = Math.max(100, totalFlour - starterFlour);
+        }
+      }
+
+      const targetHydrationWater = totalFlour * (b.hydration / 100);
+      const totalWater = b.useSourdough && b.subtractStarter ? targetHydrationWater : (targetHydrationWater + starterWater);
+      const saltGrams = totalFlour * (b.saltPct / 100);
+      const yeastGrams = b.yeastType !== 'none' ? totalFlour * (b.yeastPct / 100) : 0;
+      const extraGrams = (b.extras || []).reduce((sum, e) => sum + (parseFloat(e.grams) || 0), 0);
+
+      const totalDoughWeight = totalFlour + totalWater + saltGrams + yeastGrams + (b.useSourdough ? starterFlour : 0) + extraGrams;
+      const effectiveHydration = Math.round((totalWater / (totalFlour + (b.useSourdough && b.subtractStarter ? starterFlour : 0))) * 100);
+
+      return {
+        totalFlour: Math.round(totalFlour),
+        totalWater: Math.round(totalWater),
+        saltGrams: Math.round(saltGrams * 10) / 10,
+        yeastGrams: Math.round(yeastGrams * 10) / 10,
+        starterFlour: Math.round(starterFlour),
+        starterWater: Math.round(starterWater),
+        totalDoughWeight: Math.round(totalDoughWeight),
+        teigausbeute: effectiveHydration + 100,
+        effectiveHydration
+      };
+    }
+
+    function renderBreadCalculatorView() {
+      const b = state.bread;
+      const m = calculateBreadMetrics();
+
+      return `
+        <div class="max-w-5xl mx-auto space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-6 rounded-2xl border border-stone-200 shadow-2xs">
+            <div>
+              <h2 class="text-xl sm:text-2xl font-extrabold text-stone-900"><i class="fa-solid fa-bread-slice text-orange-600 mr-2"></i>Brotteigrechner & Assistent</h2>
+              <p class="text-xs sm:text-sm text-stone-500">Wähle bis zu 3 Backziele – der Assistent ermittelt ideale Vorstufen, Teigführung & Rezepte.</p>
+            </div>
+            <select id="bread-preset-select" class="px-3 py-2 bg-stone-50 border border-stone-200 rounded-xl text-xs sm:text-sm font-semibold text-stone-700">
+              <option value="">Vorlage wählen...</option>
+              ${BREAD_PRESETS.map((p, idx) => `<option value="${idx}">${escapeHtml(p.name)}</option>`).join('')}
+            </select>
+          </div>
+
+          <!-- Goal Assistant (Up to 3 goals) -->
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-2xs space-y-4">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-stone-700"><i class="fa-solid fa-wand-magic-sparkles text-orange-600 mr-2"></i>Brot-Assistent (Max. 3 Ziele wählen)</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              ${[
+                { id: 'lange_frisch', label: 'Lange Frischhaltung' },
+                { id: 'aroma', label: 'Intensives Aroma' },
+                { id: 'saftig', label: 'Extra saftige Krume' },
+                { id: 'luftig', label: 'Luftig & großporig' },
+                { id: 'schnell', label: 'Schnell & einfach' },
+                { id: 'knusprig', label: 'Knusprige Kruste' },
+                { id: 'rustikal', label: 'Kräftig & rustikal' }
+              ].map(g => {
+                const active = (b.goals || []).includes(g.id);
+                return `
+                  <button data-action="toggle-bread-goal" data-goal="${g.id}" class="p-3 rounded-xl border text-xs font-semibold text-left transition ${active ? 'bg-orange-600 text-white border-orange-600 shadow-xs' : 'bg-stone-50 text-stone-700 border-stone-200 hover:bg-stone-100'}">
+                    <i class="fa-solid ${active ? 'fa-check-circle' : 'fa-circle text-stone-300'} mr-1.5"></i>${g.label}
+                  </button>
+                `;
+              }).join('')}
+            </div>
+            <button data-action="apply-bread-assistant" class="w-full py-2.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold transition">
+              <i class="fa-solid fa-bolt mr-1.5"></i>Assistenten-Empfehlung auf Rechner anwenden
+            </button>
+          </div>
+
+          <!-- Calculator Form Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-7 space-y-6">
+              <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-2xs space-y-4">
+                <h3 class="font-bold text-stone-900">Mehlkomponenten</h3>
+                <div class="space-y-2">
+                  ${b.flours.map((f, idx) => `
+                    <div class="flex gap-2 items-center">
+                      <input type="text" data-bread-flour-name="${idx}" value="${escapeHtml(f.name)}" class="flex-1 px-3 py-2 border border-stone-200 rounded-xl text-sm" placeholder="Mehltype" />
+                      <input type="number" data-bread-flour-grams="${idx}" value="${f.grams}" class="w-24 px-3 py-2 border border-stone-200 rounded-xl text-sm text-right" placeholder="Gramm" />
+                      <span class="text-xs text-stone-500 w-6">g</span>
+                      <button data-action="bread-remove-flour" data-index="${idx}" class="text-stone-400 hover:text-red-600 p-1.5"><i class="fa-solid xmark fa-trash"></i></button>
+                    </div>
+                  `).join('')}
+                </div>
+                <button data-action="bread-add-flour" class="text-xs font-bold text-orange-600 hover:underline">+ Mehl hinzufügen</button>
+              </div>
+
+              <!-- Sliders -->
+              <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-2xs space-y-4">
+                <div class="flex justify-between items-center">
+                  <label class="font-bold text-stone-900 text-sm">Hydration (Teigausbeute TA ${m.teigausbeute})</label>
+                  <span class="font-mono font-bold text-orange-600">${b.hydration}%</span>
+                </div>
+                <input id="bread-hydration-range" type="range" min="55" max="95" step="1" value="${b.hydration}" class="w-full accent-orange-600" />
+
+                <div class="flex justify-between items-center pt-3 border-t border-stone-100">
+                  <label class="font-bold text-stone-900 text-sm">Salzgehalt</label>
+                  <span class="font-mono font-bold text-orange-600">${b.saltPct}%</span>
+                </div>
+                <input id="bread-salt-range" type="range" min="1.5" max="3.0" step="0.1" value="${b.saltPct}" class="w-full accent-orange-600" />
+              </div>
+            </div>
+
+            <!-- Metrics Summary Card -->
+            <div class="lg:col-span-5 bg-white p-6 rounded-2xl border border-stone-200 shadow-2xs flex flex-col justify-between space-y-6">
+              <div>
+                <span class="text-xs font-extrabold uppercase tracking-wider text-orange-600">Berechnete Rezeptur</span>
+                <input id="bread-title-input" type="text" value="${escapeHtml(b.recipeTitle)}" class="w-full mt-1 text-xl font-extrabold text-stone-900 border-b border-dashed border-stone-300 pb-1 focus:outline-none focus:border-orange-500" />
+
+                <div class="mt-4 space-y-2 text-sm">
+                  <div class="flex justify-between py-1.5 border-b border-stone-100">
+                    <span class="text-stone-600">Gesamtmehl:</span>
+                    <strong class="font-mono">${m.totalFlour} g</strong>
+                  </div>
+                  <div class="flex justify-between py-1.5 border-b border-stone-100">
+                    <span class="text-stone-600">Gesamtwasser (Schüttwasser):</span>
+                    <strong class="font-mono">${m.totalWater} g</strong>
+                  </div>
+                  <div class="flex justify-between py-1.5 border-b border-stone-100">
+                    <span class="text-stone-600">Salz:</span>
+                    <strong class="font-mono">${m.saltGrams} g</strong>
+                  </div>
+                  <div class="flex justify-between py-1.5 border-b border-stone-100">
+                    <span class="text-stone-600">Teigausbeute (TA):</span>
+                    <strong class="font-mono text-orange-600">TA ${m.teigausbeute}</strong>
+                  </div>
+                  <div class="flex justify-between py-1.5 font-bold text-base pt-2">
+                    <span>Gesamtteiggewicht:</span>
+                    <span class="font-mono text-orange-600">${m.totalDoughWeight} g</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-2">
+                <button data-action="bread-save-recipe" class="w-full py-3 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold shadow-xs text-sm transition">
+                  <i class="fa-solid fa-bookmark mr-2"></i>Als Rezept speichern
+                </button>
+                <button data-action="bread-to-shopping" class="w-full py-2.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-800 font-semibold text-sm transition">
+                  <i class="fa-solid fa-cart-plus mr-2"></i>Zutaten auf Einkaufsliste
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderImportView() {
+      return `
+        <div class="max-w-3xl mx-auto space-y-6">
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-2xs">
+            <h2 class="text-xl font-extrabold text-stone-900 mb-1"><i class="fa-solid fa-globe text-orange-600 mr-2"></i>Rezept aus dem Internet importieren</h2>
+            <p class="text-sm text-stone-500 mb-4">Füge den Link (URL) einer Rezeptseite ein. Die App liest Titel, Bild, Zutaten und Schritte automatisch aus.</p>
+            <div class="flex flex-col sm:flex-row gap-2">
+              <input id="import-url-input" type="url" placeholder="https://..." class="flex-1 px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-sm" />
+              <button data-action="run-url-import" class="px-5 py-2.5 bg-orange-600 text-white rounded-xl text-sm font-semibold hover:bg-orange-700">Importieren</button>
+            </div>
+            <div id="import-status" class="hidden mt-3 text-sm"></div>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-2xs">
+            <h3 class="text-base font-bold text-stone-900 mb-3">1-Klick Demo-Rezepte zum Ausprobieren</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              ${DEMO_IMPORTS.map((demo, idx) => `
+                <div class="p-3.5 rounded-xl border border-stone-200 hover:border-orange-300 bg-stone-50 flex flex-col justify-between">
+                  <div>
+                    <span class="text-[11px] font-bold text-orange-600">${demo.category}</span>
+                    <h4 class="font-bold text-sm text-stone-900 mt-0.5">${escapeHtml(demo.title)}</h4>
+                  </div>
+                  <button data-action="import-demo" data-index="${idx}" class="mt-3 w-full py-1.5 rounded-lg bg-white border border-stone-200 hover:bg-orange-600 hover:text-white text-xs font-semibold transition">+ Übernehmen</button>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderEditorView() {
+      const r = state.editingRecipe || {
+        id: null, title: '', category: 'Hauptgericht', diet: 'Normal', prepTime: 30, servings: 4, rating: 0, favorite: false, sourceUrl: '', image: '', tags: [], notes: '',
+        ingredients: [{ amount: '', unit: 'g', name: '', aisle: 'Sonstiges' }], steps: ['']
+      };
+
+      return `
+        <div class="max-w-3xl mx-auto bg-white p-6 rounded-2xl border border-stone-200 shadow-2xs">
+          <div class="flex items-center justify-between mb-5">
+            <h2 class="text-xl font-extrabold text-stone-900">${r.id ? 'Rezept bearbeiten' : 'Neues Rezept anlegen'}</h2>
+            <button data-action="nav" data-view="recipes" class="text-sm text-stone-500 hover:text-stone-800">Abbrechen</button>
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-stone-500 mb-1">Rezepttitel *</label>
+              <input id="ed-title" type="text" value="${escapeHtml(r.title)}" placeholder="z.B. Omas Apfelkuchen" class="w-full px-3.5 py-2.5 border border-stone-200 rounded-xl text-sm" />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-bold uppercase text-stone-500 mb-1">Kategorie</label>
+                <select id="ed-category" class="w-full px-3 py-2.5 border border-stone-200 rounded-xl text-sm bg-white">
+                  ${MAIN_CATEGORIES.map(c => `<option value="${c}" ${r.category === c ? 'selected' : ''}>${c}</option>`).join('')}
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-stone-500 mb-1">Ernährung</label>
+                <select id="ed-diet" class="w-full px-3 py-2.5 border border-stone-200 rounded-xl text-sm bg-white">
+                  <option value="Normal" ${(r.diet || 'Normal') === 'Normal' ? 'selected' : ''}>Normal</option>
+                  <option value="Vegetarisch" ${r.diet === 'Vegetarisch' ? 'selected' : ''}>Vegetarisch</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-stone-500 mb-1">Zeit (Minuten)</label>
+                <input id="ed-time" type="number" value="${r.prepTime || 30}" class="w-full px-3.5 py-2.5 border border-stone-200 rounded-xl text-sm" />
+              </div>
+            </div>
+
+            <div id="ed-drink-type-wrap" class="${r.category === 'Getränke' ? '' : 'hidden'} p-3.5 rounded-xl bg-stone-50 border border-stone-200">
+              <label class="block text-xs font-bold uppercase text-stone-500 mb-2">Getränke-Unterscheidung</label>
+              <div class="flex flex-wrap gap-3">
+                <label class="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-teal-200 bg-teal-50 text-teal-900 text-sm font-semibold cursor-pointer">
+                  <input type="radio" name="ed-drink-type" value="alkoholfrei" ${(r.drinkType || 'alkoholfrei') === 'alkoholfrei' ? 'checked' : ''} class="accent-teal-600" /> Alkoholfrei
+                </label>
+                <label class="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-rose-200 bg-rose-50 text-rose-950 text-sm font-semibold cursor-pointer">
+                  <input type="radio" name="ed-drink-type" value="alkoholhaltig" ${r.drinkType === 'alkoholhaltig' ? 'checked' : ''} class="accent-rose-900" /> Alkoholhaltig
+                </label>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold uppercase text-stone-500 mb-1">Bild-URL (optional)</label>
+                <input id="ed-image" type="url" value="${escapeHtml(r.image)}" placeholder="https://..." class="w-full px-3.5 py-2.5 border border-stone-200 rounded-xl text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-stone-500 mb-1">Tags (kommagetrennt)</label>
+                <input id="ed-tags" type="text" value="${escapeHtml((r.tags || []).join(', '))}" placeholder="Schnell, Sommer" class="w-full px-3.5 py-2.5 border border-stone-200 rounded-xl text-sm" />
+              </div>
+            </div>
+
+            <div class="pt-3 border-t border-stone-100">
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-xs font-bold uppercase text-stone-500">Zutaten</label>
+                <button data-action="ed-add-ing" class="text-xs font-semibold text-orange-600 hover:underline">+ Zutat hinzufügen</button>
+              </div>
+              <div id="ed-ing-list" class="space-y-2">
+                ${(r.ingredients || []).map(ing => `
+                  <div class="flex gap-2 items-center ed-ing-row">
+                    <input type="text" value="${escapeHtml(ing.amount)}" placeholder="Menge" class="w-16 px-2.5 py-2 border border-stone-200 rounded-lg text-sm ed-ing-amt" />
+                    <input type="text" value="${escapeHtml(ing.unit)}" placeholder="Einheit" class="w-20 px-2.5 py-2 border border-stone-200 rounded-lg text-sm ed-ing-unit" />
+                    <input type="text" value="${escapeHtml(ing.name)}" placeholder="Zutat" class="flex-1 px-2.5 py-2 border border-stone-200 rounded-lg text-sm ed-ing-name" />
+                    <button data-action="ed-remove-row" class="text-stone-400 hover:text-red-600 px-1.5"><i class="fa-solid fa-xmark"></i></button>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="pt-3 border-t border-stone-100">
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-xs font-bold uppercase text-stone-500">Zubereitungsschritte</label>
+                <button data-action="ed-add-step" class="text-xs font-semibold text-orange-600 hover:underline">+ Schritt hinzufügen</button>
+              </div>
+              <div id="ed-step-list" class="space-y-2">
+                ${(r.steps || []).map((step, idx) => `
+                  <div class="flex gap-2 items-start ed-step-row">
+                    <span class="mt-2 text-xs font-bold text-stone-400">${idx + 1}.</span>
+                    <textarea rows="2" class="flex-1 px-3 py-2 border border-stone-200 rounded-lg text-sm ed-step-text">${escapeHtml(step)}</textarea>
+                    <button data-action="ed-remove-row" class="mt-2 text-stone-400 hover:text-red-600 px-1.5"><i class="fa-solid fa-xmark"></i></button>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-stone-500 mb-1">Notizen & Tipps</label>
+              <textarea id="ed-notes" rows="3" class="w-full px-3.5 py-2.5 border border-stone-200 rounded-xl text-sm">${escapeHtml(r.notes || '')}</textarea>
+            </div>
+
+            <button data-action="save-editor" class="w-full py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-xl text-sm shadow transition">
+              Rezept speichern
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderShoppingView() {
+      const grouped = {};
+      state.shoppingList.forEach((item, idx) => {
+        const aisle = item.aisle || 'Sonstiges';
+        if (!grouped[aisle]) grouped[aisle] = [];
+        grouped[aisle].push({ ...item, origIndex: idx });
+      });
+
+      return `
+        <div class="max-w-3xl mx-auto space-y-6">
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-2xs flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h2 class="text-xl font-extrabold text-stone-900"><i class="fa-solid fa-cart-shopping text-orange-600 mr-2"></i>Einkaufsliste</h2>
+              <p class="text-sm text-stone-500">Automatisch nach Supermarkt-Abteilen sortiert</p>
+            </div>
+            <div class="flex gap-2">
+              <button data-action="clear-checked-shopping" class="px-3.5 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-semibold">Erledigte löschen</button>
+              <button data-action="clear-all-shopping" class="px-3.5 py-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl text-xs font-semibold">Alle leeren</button>
+            </div>
+          </div>
+
+          <div class="flex gap-2">
+            <input id="manual-shop-input" type="text" placeholder="Zusätzlichen Artikel hinzufügen..." class="flex-1 px-4 py-2.5 bg-white border border-stone-200 rounded-xl text-sm" />
+            <button data-action="add-manual-shopping" class="px-4 py-2.5 bg-orange-600 hover:bg-orange-700 text-white rounded-xl text-sm font-semibold">+ Hinzufügen</button>
+          </div>
+
+          ${Object.keys(grouped).length === 0 ? `
+            <div class="text-center py-16 bg-white rounded-2xl border border-stone-200 text-stone-400">Deine Einkaufsliste ist leer.</div>
+          ` : `
+            <div class="space-y-4">
+              ${Object.keys(grouped).map(aisle => `
+                <div class="bg-white p-4 rounded-2xl border border-stone-200">
+                  <h3 class="text-xs font-extrabold uppercase tracking-wider text-orange-600 mb-2">${escapeHtml(aisle)}</h3>
+                  <ul class="divide-y divide-stone-100">
+                    ${grouped[aisle].map(item => `
+                      <li class="py-2 flex items-center justify-between text-sm ${item.checked ? 'line-through text-stone-400' : 'text-stone-800'}">
+                        <label class="flex items-center gap-2.5 cursor-pointer flex-1">
+                          <input type="checkbox" data-action="toggle-shop-item" data-index="${item.origIndex}" ${item.checked ? 'checked' : ''} class="accent-orange-600 rounded" />
+                          <span>${escapeHtml(item.amount)} ${escapeHtml(item.unit)} <strong>${escapeHtml(item.name)}</strong></span>
+                        </label>
+                        <button data-action="remove-shop-item" data-index="${item.origIndex}" class="text-stone-300 hover:text-red-600 px-2"><i class="fa-solid fa-xmark"></i></button>
+                      </li>
+                    `).join('')}
+                  </ul>
+                </div>
+              `).join('')}
+            </div>
+          `}
+        </div>
+      `;
+    }
+
+    function renderPlannerView() {
+      const days = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
+      return `
+        <div class="max-w-4xl mx-auto space-y-6">
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-2xs flex justify-between items-center">
+            <div>
+              <h2 class="text-xl font-extrabold text-stone-900"><i class="fa-solid fa-calendar-days text-orange-600 mr-2"></i>Wochenplan</h2>
+              <p class="text-sm text-stone-500">Plane deine Mahlzeiten für die ganze Woche</p>
+            </div>
+            <button data-action="planner-to-shopping" class="px-4 py-2 bg-orange-50 text-orange-700 hover:bg-orange-100 border border-orange-200 rounded-xl text-xs font-bold">
+              <i class="fa-solid fa-cart-plus mr-1.5"></i>Alle Zutaten auf Einkaufsliste
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-4">
+            ${days.map(day => `
+              <div class="bg-white p-4 rounded-2xl border border-stone-200 flex flex-col justify-between">
+                <div>
+                  <h3 class="font-bold text-sm text-stone-900 mb-3 border-b border-stone-100 pb-2 flex justify-between">
+                    <span>${day}</span>
+                    <button data-action="open-day-picker" data-day="${day}" class="text-orange-600 hover:scale-110 transition"><i class="fa-solid fa-plus-circle"></i></button>
+                  </h3>
+                  <div class="space-y-2 mb-3">
+                    ${(state.mealPlan[day] || []).map((rid, idx) => {
+                      const r = state.recipes.find(x => x.id === rid);
+                      if (!r) return '';
+                      return `
+                        <div class="p-2 bg-stone-50 rounded-xl border border-stone-200 text-xs flex justify-between items-center">
+                          <span class="font-semibold truncate flex-1">${escapeHtml(r.title)}</span>
+                          <button data-action="remove-from-day" data-day="${day}" data-index="${idx}" class="text-stone-400 hover:text-red-600 ml-1"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                      `;
+                    }).join('')}
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderCookingMode() {
+      const r = state.recipes.find(x => x.id === state.activeRecipeId);
+      const overlay = document.getElementById('cooking-mode-overlay');
+      if (!r) { overlay.classList.add('hidden'); return; }
+      const steps = r.steps || [];
+      const idx = Math.max(0, Math.min(state.cookingStep, steps.length - 1));
+
+      overlay.classList.remove('hidden');
+      overlay.innerHTML = `
+        <div class="p-4 border-b border-stone-800 flex items-center justify-between">
+          <div>
+            <span class="text-xs uppercase tracking-wider text-orange-500 font-bold">Kochmodus</span>
+            <h2 class="text-lg font-bold truncate max-w-sm">${escapeHtml(r.title)}</h2>
+          </div>
+          <button data-action="close-cooking" class="px-3 py-1.5 rounded-xl bg-stone-800 hover:bg-stone-700 text-xs font-semibold">Beenden</button>
+        </div>
+        <div class="flex-1 flex flex-col items-center justify-center p-6 max-w-2xl mx-auto text-center">
+          <div class="w-16 h-16 rounded-full bg-orange-600/20 text-orange-500 flex items-center justify-center text-2xl font-black mb-6">
+            ${idx + 1} / ${steps.length}
+          </div>
+          <p class="text-xl sm:text-2xl font-medium leading-relaxed mb-8">${escapeHtml(steps[idx])}</p>
+        </div>
+        <div class="p-4 border-t border-stone-800 flex justify-between max-w-2xl mx-auto w-full">
+          <button data-action="cooking-prev" ${idx === 0 ? 'disabled' : ''} class="px-5 py-2.5 rounded-xl bg-stone-800 disabled:opacity-30 font-semibold text-sm">Zurück</button>
+          <button data-action="cooking-next" class="px-5 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 font-semibold text-sm">${idx === steps.length - 1 ? 'Fertig!' : 'Weiter'}</button>
+        </div>
+      `;
+    }
+
+    function openInstallModal() {
+      showModal(`
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-extrabold text-stone-900">Als App installieren</h3>
+          <button data-action="close-modal" class="text-stone-400 hover:text-stone-700"><i class="fa-solid fa-xmark text-lg"></i></button>
+        </div>
+        <div class="space-y-4 text-sm text-stone-700">
+          <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200">
+            <div class="font-bold text-stone-900 mb-1"><i class="fa-brands fa-android text-emerald-600 mr-1.5"></i>Android (Google Chrome)</div>
+            <ol class="list-decimal list-inside text-xs space-y-1 text-stone-600">
+              <li>Öffne das Menü (drei Punkte oben rechts).</li>
+              <li>Wähle <strong>Zum Startbildschirm hinzufügen</strong> oder <strong>App installieren</strong>.</li>
+            </ol>
+          </div>
+          <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200">
+            <div class="font-bold text-stone-900 mb-1"><i class="fa-brands fa-apple text-stone-900 mr-1.5"></i>iPhone & iPad (Safari)</div>
+            <ol class="list-decimal list-inside text-xs space-y-1 text-stone-600">
+              <li>Tippe unten auf das <strong>Teilen</strong>-Symbol.</li>
+              <li>Scrolle und wähle <strong>Zum Home-Bildschirm</strong>.</li>
+            </ol>
+          </div>
+        </div>
+      `);
+    }
+
+    function openStorageModal() {
+      showModal(`
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-extrabold text-stone-900">Speicher & Backup</h3>
+          <button data-action="close-modal" class="text-stone-400 hover:text-stone-700"><i class="fa-solid fa-xmark text-lg"></i></button>
+        </div>
+        <div class="space-y-3">
+          <button data-action="export-json" class="w-full py-2.5 bg-orange-600 hover:bg-orange-700 text-white rounded-xl text-sm font-semibold">JSON-Backup herunterladen</button>
+          <label class="block w-full py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-800 text-center rounded-xl text-sm font-semibold cursor-pointer">
+            Backup wiederherstellen <input id="import-json-file" type="file" accept=".json" class="hidden" />
+          </label>
+        </div>
+      `);
+    }
+
+    function showModal(html) {
+      const backdrop = document.getElementById('modal-backdrop');
+      const container = document.getElementById('modal-container');
+      container.innerHTML = html;
+      backdrop.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('modal-backdrop').classList.add('hidden');
+    }
+
+    function escapeHtml(str) {
+      return (str || '').toString().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function formatAmount(amount, ratio) {
+      if (!amount || isNaN(amount)) return amount || '';
+      const val = parseFloat(amount) * ratio;
+      return val % 1 === 0 ? val : val.toFixed(1);
+    }
+
+    function guessAisle(name) {
+      const n = (name || '').toLowerCase();
+      if (n.includes('mehl') || n.includes('zucker') || n.includes('backpulver')) return 'Backzutaten & Mehl';
+      if (n.includes('milch') || n.includes('käse') || n.includes('butter') || n.includes('ei')) return 'Milchprodukte & Eier';
+      if (n.includes('tomate') || n.includes('zwiebel') || n.includes('salat') || n.includes('kräuter') || n.includes('zitron')) return 'Obst & Gemüse';
+      if (n.includes('fleisch') || n.includes('schinken') || n.includes('speck') || n.includes('hähnchen')) return 'Fleisch & Wurst';
+      if (n.includes('wasser') || n.includes('saft') || n.includes('wein') || n.includes('prosecco')) return 'Getränke';
+      return 'Sonstiges';
+    }
+
+    // ==========================================
+    // 5. EVENT HANDLERS
+    // ==========================================
+    document.addEventListener('click', (e) => {
+      const target = e.target.closest('[data-action]');
+      if (!target) return;
+      const action = target.dataset.action;
+
+      if (action === 'nav') {
+        state.view = target.dataset.view;
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (action === 'open-recipe') {
+        state.activeRecipeId = target.dataset.id;
+        state.currentServings = state.recipes.find(x => x.id === state.activeRecipeId)?.servings || 2;
+        state.view = 'detail';
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (action === 'toggle-fav') {
+        e.stopPropagation();
+        const r = state.recipes.find(x => x.id === target.dataset.id);
+        if (r) { r.favorite = !r.favorite; saveState(); render(); }
+      } else if (action === 'delete-recipe') {
+        e.stopPropagation();
+        if (confirm('Dieses Rezept wirklich löschen?')) {
+          state.recipes = state.recipes.filter(x => x.id !== target.dataset.id);
+          saveState();
+          if (state.view === 'detail') state.view = 'recipes';
+          render();
+          showToast('Rezept gelöscht.');
+        }
+      } else if (action === 'select-category') {
+        state.selectedCategory = target.dataset.category;
+        if (state.selectedCategory !== 'Getränke') state.selectedDrinkType = 'Alle';
+        render();
+      } else if (action === 'select-diet') {
+        state.selectedDiet = target.dataset.diet;
+        render();
+      } else if (action === 'select-drink-type') {
+        state.selectedDrinkType = target.dataset.drinkType;
+        render();
+      } else if (action === 'toggle-fav-filter') {
+        state.onlyFavorites = !state.onlyFavorites;
+        render();
+      } else if (action === 'rate-recipe') {
+        const r = state.recipes.find(x => x.id === target.dataset.id);
+        if (r) { r.rating = parseInt(target.dataset.rating, 10); saveState(); render(); }
+      } else if (action === 'change-servings') {
+        const delta = parseInt(target.dataset.delta, 10);
+        state.currentServings = Math.max(1, (state.currentServings || 2) + delta);
+        render();
+      } else if (action === 'toggle-ing-check') {
+        state.checkedIngredients[target.dataset.key] = !state.checkedIngredients[target.dataset.key];
+        render();
+      } else if (action === 'toggle-step-check') {
+        state.checkedSteps[target.dataset.key] = !state.checkedSteps[target.dataset.key];
+        render();
+      } else if (action === 'add-recipe-to-shopping') {
+        const r = state.recipes.find(x => x.id === target.dataset.id);
+        if (r) {
+          const ratio = (state.currentServings || r.servings || 2) / (r.servings || 2);
+          (r.ingredients || []).forEach(ing => {
+            state.shoppingList.push({ ...ing, amount: formatAmount(ing.amount, ratio), checked: false });
+          });
+          saveState();
+          showToast('Zutaten zur Einkaufsliste hinzugefügt!');
+        }
+      } else if (action === 'edit-recipe') {
+        state.editingRecipe = state.recipes.find(x => x.id === target.dataset.id);
+        state.view = 'editor';
+        render();
+      } else if (action === 'print-recipe') {
+        window.print();
+      } else if (action === 'start-cooking') {
+        state.cookingStep = 0;
+        renderCookingMode();
+      } else if (action === 'close-cooking') {
+        document.getElementById('cooking-mode-overlay').classList.add('hidden');
+      } else if (action === 'cooking-prev') {
+        state.cookingStep = Math.max(0, state.cookingStep - 1);
+        renderCookingMode();
+      } else if (action === 'cooking-next') {
+        const r = state.recipes.find(x => x.id === state.activeRecipeId);
+        if (r && state.cookingStep < r.steps.length - 1) {
+          state.cookingStep++;
+          renderCookingMode();
+        } else {
+          document.getElementById('cooking-mode-overlay').classList.add('hidden');
+          showToast('Guten Appetit! 🎉');
+        }
+      } else if (action === 'toggle-bread-goal') {
+        const goal = target.dataset.goal;
+        const idx = state.bread.goals.indexOf(goal);
+        if (idx !== -1) state.bread.goals.splice(idx, 1);
+        else if (state.bread.goals.length < 3) state.bread.goals.push(goal);
+        else showToast('Maximal 3 Ziele wählbar.', 'error');
+        saveState(); render();
+      } else if (action === 'apply-bread-assistant') {
+        showToast('Assistenten-Einstellungen angewendet!');
+      } else if (action === 'bread-add-flour') {
+        state.bread.flours.push({ name: 'Dinkelmehl 630', grams: 100 });
+        saveState(); render();
+      } else if (action === 'bread-remove-flour') {
+        if (state.bread.flours.length > 1) {
+          state.bread.flours.splice(parseInt(target.dataset.index, 10), 1);
+          saveState(); render();
+        }
+      } else if (action === 'bread-save-recipe') {
+        const m = calculateBreadMetrics();
+        const newR = {
+          id: 'r_' + Date.now(),
+          title: state.bread.recipeTitle || 'Mein Brot',
+          category: 'Backen',
+          diet: 'Vegetarisch',
+          prepTime: 120,
+          servings: 8,
+          rating: 5,
+          favorite: true,
+          image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80',
+          tags: ['Brot', `TA ${m.teigausbeute}`],
+          notes: `Berechnet mit Teigrechner: Gesamtgewicht ${m.totalDoughWeight}g, Hydration ${m.effectiveHydration}%.`,
+          ingredients: state.bread.flours.map(f => ({ amount: f.grams, unit: 'g', name: f.name, aisle: 'Backzutaten & Mehl' }))
+            .concat([{ amount: m.totalWater, unit: 'g', name: 'Wasser', aisle: 'Getränke' }, { amount: m.saltGrams, unit: 'g', name: 'Salz', aisle: 'Gewürze & Backzutaten' }]),
+          steps: ['Teig kneten', 'Gären lassen', 'Backen']
+        };
+        state.recipes.unshift(newR);
+        saveState();
+        state.activeRecipeId = newR.id;
+        state.view = 'detail';
+        render();
+        showToast('Brot als Rezept gespeichert!');
+      } else if (action === 'bread-to-shopping') {
+        const m = calculateBreadMetrics();
+        state.bread.flours.forEach(f => state.shoppingList.push({ amount: f.grams, unit: 'g', name: f.name, aisle: 'Backzutaten & Mehl', checked: false }));
+        state.shoppingList.push({ amount: m.totalWater, unit: 'g', name: 'Wasser', aisle: 'Getränke', checked: false });
+        state.shoppingList.push({ amount: m.saltGrams, unit: 'g', name: 'Salz', aisle: 'Gewürze & Backzutaten', checked: false });
+        saveState();
+        showToast('Brot-Zutaten auf Einkaufsliste gesetzt!');
+      } else if (action === 'ed-add-ing') {
+        const list = document.getElementById('ed-ing-list');
+        const row = document.createElement('div');
+        row.className = 'flex gap-2 items-center ed-ing-row';
+        row.innerHTML = `<input type="text" placeholder="Menge" class="w-16 px-2.5 py-2 border border-stone-200 rounded-lg text-sm ed-ing-amt" /><input type="text" placeholder="Einheit" class="w-20 px-2.5 py-2 border border-stone-200 rounded-lg text-sm ed-ing-unit" /><input type="text" placeholder="Zutat" class="flex-1 px-2.5 py-2 border border-stone-200 rounded-lg text-sm ed-ing-name" /><button data-action="ed-remove-row" class="text-stone-400 hover:text-red-600 px-1.5"><i class="fa-solid fa-xmark"></i></button>`;
+        list.appendChild(row);
+      } else if (action === 'ed-add-step') {
+        const list = document.getElementById('ed-step-list');
+        const idx = list.children.length + 1;
+        const row = document.createElement('div');
+        row.className = 'flex gap-2 items-start ed-step-row';
+        row.innerHTML = `<span class="mt-2 text-xs font-bold text-stone-400">${idx}.</span><textarea rows="2" class="flex-1 px-3 py-2 border border-stone-200 rounded-lg text-sm ed-step-text"></textarea><button data-action="ed-remove-row" class="mt-2 text-stone-400 hover:text-red-600 px-1.5"><i class="fa-solid fa-xmark"></i></button>`;
+        list.appendChild(row);
+      } else if (action === 'ed-remove-row') {
+        target.closest('.ed-ing-row, .ed-step-row')?.remove();
+      } else if (action === 'save-editor') {
+        const title = document.getElementById('ed-title').value.trim();
+        if (!title) { showToast('Bitte Titel eingeben.', 'error'); return; }
+        const ingredients = Array.from(document.querySelectorAll('.ed-ing-row')).map(row => {
+          const amt = row.querySelector('.ed-ing-amt').value.trim();
+          const unit = row.querySelector('.ed-ing-unit').value.trim();
+          const name = row.querySelector('.ed-ing-name').value.trim();
+          return name ? { amount: amt, unit, name, aisle: guessAisle(name) } : null;
+        }).filter(Boolean);
+        const steps = Array.from(document.querySelectorAll('.ed-step-text')).map(ta => ta.value.trim()).filter(Boolean);
+        const tags = document.getElementById('ed-tags').value.split(',').map(t => t.trim()).filter(Boolean);
+        const selectedCat = document.getElementById('ed-category').value;
+        const selectedDiet = document.getElementById('ed-diet').value;
+        const drinkRadio = document.querySelector('input[name="ed-drink-type"]:checked');
+
+        const recipeObj = {
+          id: state.editingRecipe?.id || 'r_' + Date.now(),
+          title,
+          category: selectedCat,
+          diet: selectedDiet,
+          drinkType: selectedCat === 'Getränke' ? (drinkRadio ? drinkRadio.value : 'alkoholfrei') : undefined,
+          prepTime: parseInt(document.getElementById('ed-time').value, 10) || 30,
+          servings: 4,
+          rating: state.editingRecipe?.rating || 0,
+          favorite: state.editingRecipe?.favorite || false,
+          image: document.getElementById('ed-image').value.trim() || 'https://images.unsplash.com/photo-1495521821757-a1efb6729352?auto=format&fit=crop&w=900&q=80',
+          tags,
+          notes: document.getElementById('ed-notes').value.trim(),
+          ingredients: ingredients.length ? ingredients : [{ amount: 1, unit: '', name: 'Zutat', aisle: 'Sonstiges' }],
+          steps: steps.length ? steps : ['Zubereitung']
+        };
+
+        if (state.editingRecipe?.id) {
+          const i = state.recipes.findIndex(x => x.id === state.editingRecipe.id);
+          if (i !== -1) state.recipes[i] = recipeObj;
+        } else {
+          state.recipes.unshift(recipeObj);
+        }
+        state.editingRecipe = null;
+        saveState();
+        state.activeRecipeId = recipeObj.id;
+        state.view = 'detail';
+        render();
+        showToast('Rezept gespeichert!');
+      } else if (action === 'import-demo') {
+        const demo = JSON.parse(JSON.stringify(DEMO_IMPORTS[parseInt(target.dataset.index, 10)]));
+        demo.id = 'r_' + Date.now();
+        state.recipes.unshift(demo);
+        saveState();
+        showToast(`"${demo.title}" übernommen!`);
+        state.view = 'recipes';
+        render();
+      } else if (action === 'add-manual-shopping') {
+        const inp = document.getElementById('manual-shop-input');
+        if (inp && inp.value.trim()) {
+          state.shoppingList.push({ amount: '', unit: '', name: inp.value.trim(), aisle: guessAisle(inp.value), checked: false });
+          saveState(); render();
+        }
+      } else if (action === 'toggle-shop-item') {
+        const idx = parseInt(target.dataset.index, 10);
+        if (state.shoppingList[idx]) { state.shoppingList[idx].checked = !state.shoppingList[idx].checked; saveState(); render(); }
+      } else if (action === 'remove-shop-item') {
+        state.shoppingList.splice(parseInt(target.dataset.index, 10), 1);
+        saveState(); render();
+      } else if (action === 'clear-checked-shopping') {
+        state.shoppingList = state.shoppingList.filter(i => !i.checked);
+        saveState(); render();
+      } else if (action === 'clear-all-shopping') {
+        state.shoppingList = [];
+        saveState(); render();
+      } else if (action === 'open-day-picker') {
+        const day = target.dataset.day;
+        showModal(`
+          <div class="flex items-center justify-between mb-3"><h3 class="font-bold text-stone-900">Rezept für ${day} wählen</h3><button data-action="close-modal" class="text-stone-400"><i class="fa-solid fa-xmark"></i></button></div>
+          <div class="space-y-2 max-h-80 overflow-y-auto">
+            ${state.recipes.map(r => `<button data-action="assign-day-recipe" data-day="${day}" data-id="${r.id}" class="w-full text-left p-2.5 rounded-xl border border-stone-200 hover:border-orange-500 hover:bg-orange-50 text-sm font-medium">${escapeHtml(r.title)}</button>`).join('')}
+          </div>
+        `);
+      } else if (action === 'assign-day-recipe') {
+        const { day, id } = target.dataset;
+        if (!state.mealPlan[day]) state.mealPlan[day] = [];
+        state.mealPlan[day].push(id);
+        saveState(); closeModal(); render();
+      } else if (action === 'remove-from-day') {
+        state.mealPlan[target.dataset.day].splice(parseInt(target.dataset.index, 10), 1);
+        saveState(); render();
+      } else if (action === 'planner-to-shopping') {
+        let count = 0;
+        ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'].forEach(day => {
+          (state.mealPlan[day] || []).forEach(rid => {
+            const r = state.recipes.find(x => x.id === rid);
+            if (r) { (r.ingredients || []).forEach(ing => { state.shoppingList.push({ ...ing, checked: false }); count++; }); }
+          });
+        });
+        saveState(); showToast(`${count} Zutaten übertragen!`);
+      } else if (action === 'open-install-modal') {
+        openInstallModal();
+      } else if (action === 'open-storage-modal') {
+        openStorageModal();
+      } else if (action === 'export-json') {
+        const blob = new Blob([JSON.stringify({ recipes: state.recipes, shoppingList: state.shoppingList, mealPlan: state.mealPlan }, null, 2)], { type: 'application/json' });
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `rezeptsammler_backup.json`; a.click();
+      } else if (action === 'close-modal') {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('input', (e) => {
+      const id = e.target.id;
+      if (id === 'search-input') {
+        state.searchQuery = e.target.value; render();
+        const inp = document.getElementById('search-input'); if (inp) { inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); }
+      } else if (id === 'bread-hydration-range') {
+        state.bread.hydration = parseFloat(e.target.value) || 68; saveState(); render();
+      } else if (id === 'bread-salt-range') {
+        state.bread.saltPct = parseFloat(e.target.value) || 2.2; saveState(); render();
+      } else if (id === 'bread-title-input') {
+        state.bread.recipeTitle = e.target.value; saveState();
+      } else if (e.target.dataset.breadFlourName !== undefined) {
+        state.bread.flours[parseInt(e.target.dataset.breadFlourName, 10)].name = e.target.value; saveState();
+      } else if (e.target.dataset.breadFlourGrams !== undefined) {
+        state.bread.flours[parseInt(e.target.dataset.breadFlourGrams, 10)].grams = parseFloat(e.target.value) || 0; saveState(); render();
+      }
+    });
+
+    document.addEventListener('change', (e) => {
+      if (e.target.id === 'sort-select') { state.sortBy = e.target.value; render(); }
+      else if (e.target.id === 'ed-category') {
+        const wrap = document.getElementById('ed-drink-type-wrap');
+        if (wrap) { if (e.target.value === 'Getränke') wrap.classList.remove('hidden'); else wrap.classList.add('hidden'); }
+      }
+    });
+
+    loadState();
+    render();
+  </script>
+</body>
+</html>
